@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarioClone", "SuperMarioClone\SuperMarioClone.csproj", "{9EE47DD4-DBA3-48EA-8CB7-214851A77E28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EE47DD4-DBA3-48EA-8CB7-214851A77E28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EE47DD4-DBA3-48EA-8CB7-214851A77E28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EE47DD4-DBA3-48EA-8CB7-214851A77E28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EE47DD4-DBA3-48EA-8CB7-214851A77E28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60C17A8D-61C1-4426-A337-F8E7835F53A2}
+	EndGlobalSection
+EndGlobal
