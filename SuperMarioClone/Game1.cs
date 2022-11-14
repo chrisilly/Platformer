@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace SuperMarioClone
 {
@@ -48,5 +51,27 @@ namespace SuperMarioClone
 
             base.Draw(gameTime);
         }
+
+        private void ReadFromFile(string fileName)
+        {
+            //Rectangle playerRect = JsonParser.GetRectangle(fileName,
+            //"player");
+            //player = new Player(playerRect);
+            //List<Rectangle> platformRects = JsonParser.GetRectangleList
+            //(fileName, "platforms");
+            //foreach (Rectangle rect in platformRects)
+            //{
+            //    Platform p = new Platform(rect);
+            //    platformList.Add(p);
+            //}
+            //List<Rectangle> enemyRects = JsonParser.GetRectangleList
+            //(fileName, "enemies");
+            //foreach (Rectangle rect in enemyRects)
+            //{
+            //    Enemy e = new Enemy(rect);
+            //    enemyList.Add(e);
+            //}
+        }
     }
+
 }
