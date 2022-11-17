@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Newtonsoft.Json.Linq;
@@ -12,6 +13,10 @@ namespace SuperMarioClone
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
+        Player player;
+        List<Enemy> enemyList;
+        List<Solid> solidList;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -21,7 +26,8 @@ namespace SuperMarioClone
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            solidList = new List<Solid>();
+            enemyList = new List<Enemy>();
 
             base.Initialize();
         }
@@ -30,7 +36,9 @@ namespace SuperMarioClone
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            Assets.LoadTextures(Content);
+
+            ReadFromFile("level.json");
         }
 
         protected override void Update(GameTime gameTime)
@@ -46,31 +54,51 @@ namespace SuperMarioClone
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
 
-            // TODO: Add your drawing code here
+            foreach (Solid solid in solidList)
+                solid.Draw(spriteBatch);
+            foreach (Enemy enemy in enemyList)
+                enemy.Draw(spriteBatch);
+            player.Draw(spriteBatch);
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
 
         private void ReadFromFile(string fileName)
         {
-            //Rectangle playerRect = JsonParser.GetRectangle(fileName,
-            //"player");
-            //player = new Player(playerRect);
-            //List<Rectangle> platformRects = JsonParser.GetRectangleList
-            //(fileName, "platforms");
-            //foreach (Rectangle rect in platformRects)
-            //{
-            //    Platform p = new Platform(rect);
-            //    platformList.Add(p);
-            //}
-            //List<Rectangle> enemyRects = JsonParser.GetRectangleList
-            //(fileName, "enemies");
-            //foreach (Rectangle rect in enemyRects)
-            //{
-            //    Enemy e = new Enemy(rect);
-            //    enemyList.Add(e);
-            //}
+            Rectangle playerRectangle = JsonParser.GetRectangle(fileName, "player");
+            player = new Player(playerRectangle);
+            List<Rectangle> solidRectangleList = JsonParser.GetRectangleList(fileName, "solid");
+            foreach (Rectangle rectangle in solidRectangleList)
+            {
+                Solid solid = new Solid(rectangle);
+                solidList.Add(solid);
+            }
+            List<Rectangle> enemyRectangleList = JsonParser.GetRectangleList(fileName, "enemy");
+            foreach (Rectangle rectangle in enemyRectangleList)
+            {
+                Enemy enemy = new Enemy(rectangle);
+                enemyList.Add(enemy);
+            }
+        }
+
+        private void WriteToFile(string fileName)
+        {
+            List<GameObject> gameObjectList = new List<GameObject>();
+            for (int i = 0; i < 4; i++)
+            {
+                Solid solid = new Solid(new Rectangle(i * 100, i * 100 + 75, 120, 50));
+                gameObjectList.Add(solid);
+                Enemy enemy = new Enemy(new Rectangle(i * 100, i * 100 + 50, 25, 25));
+                gameObjectList.Add(enemy);
+            }
+
+            Player newPlayer = new Player(new Rectangle(150, 125, 50, 50));
+            gameObjectList.Add(newPlayer);
+
+            JsonParser.WriteJsonToFile(fileName, gameObjectList);
         }
     }
 
