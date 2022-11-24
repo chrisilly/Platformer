@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,26 @@ namespace SuperMarioClone
         public Player(Rectangle size) : base(size)
         {
             
+        }
+
+        public void PlayerController()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                
+            }
         }
     }
 }
