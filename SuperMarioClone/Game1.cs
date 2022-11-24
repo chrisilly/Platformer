@@ -15,7 +15,6 @@ namespace SuperMarioClone
 
         Player player;
         List<Enemy> enemyList;
-        List<Solid> solidList;
 
         public Game1()
         {
@@ -26,7 +25,7 @@ namespace SuperMarioClone
 
         protected override void Initialize()
         {
-            solidList = new List<Solid>();
+            Solid.solidList = new List<Solid>();
             enemyList = new List<Enemy>();
 
             base.Initialize();
@@ -56,7 +55,7 @@ namespace SuperMarioClone
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
-            foreach (Solid solid in solidList)
+            foreach (Solid solid in Solid.solidList)
                 solid.Draw(spriteBatch);
             foreach (Enemy enemy in enemyList)
                 enemy.Draw(spriteBatch);
@@ -74,7 +73,7 @@ namespace SuperMarioClone
             foreach (Rectangle rectangle in solidRectangleList)
             {
                 Solid solid = new Solid(rectangle);
-                solidList.Add(solid);
+                Solid.solidList.Add(solid);
             }
             List<Rectangle> enemyRectangleList = JsonParser.GetRectangleList(fileName, "enemy");
             foreach (Rectangle rectangle in enemyRectangleList)

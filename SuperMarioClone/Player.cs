@@ -11,7 +11,7 @@ namespace SuperMarioClone
     {
         public Player(Rectangle size) : base(size)
         {
-
+            
         }
     }
 }

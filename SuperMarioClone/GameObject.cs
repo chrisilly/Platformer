@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SuperMarioClone
 {
-    internal class GameObject
+    abstract internal class GameObject
     {
         public Rectangle size { get; protected set; }
         protected Texture2D texture;
