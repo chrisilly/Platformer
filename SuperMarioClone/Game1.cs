@@ -45,7 +45,7 @@ namespace SuperMarioClone
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.PlayerController();
+            player.Update(gameTime);
 
             base.Update(gameTime);
         }

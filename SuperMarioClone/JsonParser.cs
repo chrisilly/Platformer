@@ -62,7 +62,6 @@ namespace SuperMarioClone
                 return rectangle;
             }
 
-        // Not working due to missing classes
         public static void WriteJsonToFile(string filename, List<GameObject> objectList)
         {
             JArray enemyArray = new JArray();
@@ -74,17 +73,17 @@ namespace SuperMarioClone
             {
                 if (objectList[i] is Enemy)
                 {
-                    JObject obj = CreateObject(objectList[i].size);
+                    JObject obj = CreateObject(objectList[i].Hitbox);
                     enemyArray.Add(obj);
                 }
                 else if (objectList[i] is Solid)
                 {
-                    JObject obj = CreateObject(objectList[i].size);
+                    JObject obj = CreateObject(objectList[i].Hitbox);
                     solidArray.Add(obj);
                 }
                 else if (objectList[i] is Player)
                 {
-                    JObject obj = CreateObject(objectList[i].size);
+                    JObject obj = CreateObject(objectList[i].Hitbox);
                     bigobj.Add("player", obj);
                 }
             }

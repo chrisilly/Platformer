@@ -10,14 +10,25 @@ namespace SuperMarioClone
 {
     abstract internal class GameObject
     {
-        public Rectangle size { get; protected set; }
         protected Texture2D texture;
+        private Rectangle size;
+        public Rectangle Hitbox { get { return size; } }
+        protected Vector2 position;
         protected Color color = Color.White;
+
+
 
         public GameObject(Rectangle size)
         {
-            this.size = size;
             texture = Assets.tileTexture;
+            this.size = size;
+            this.position = new Vector2(size.X, size.Y);
+        }
+
+        public virtual void Update(GameTime gameTime)
+        {
+            size.X = (int)position.X;
+            size.Y = (int)position.Y;
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
