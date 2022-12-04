@@ -2,9 +2,9 @@
 	"solid": [
 		{
 			"positionX": 100,
-			"positionY": 100,
+			"positionY": 300,
 			"height": 50,
-			"width": 100
+			"width": 200
 		},
 		{
 			"positionX": 500,
@@ -28,7 +28,7 @@
 	"enemy": [
 		{
 			"positionX": 100,
-			"positionY": 75,
+			"positionY": 275,
 			"height": 25,
 			"width": 25
 		},

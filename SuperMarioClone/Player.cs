@@ -13,33 +13,46 @@ namespace SuperMarioClone
 {
     internal class Player : Actor
     {
+        bool isJumping;
+
         public Player(Rectangle size) : base(size)
         {
-            this.speed = 200f;
+            this.speed = 250f;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            PlayerInputManager();
+
+            velocity = direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            CheckPlayerInput();
         }
 
-        public void PlayerInputManager()
+        public void CheckPlayerInput()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 direction = new Vector2(-1, 0);
+                MoveX(velocity.X, OnCollide);
                 DebugKeyPressed();
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 direction = new Vector2(1, 0);
+                MoveX(velocity.X, OnCollide);
                 DebugKeyPressed();
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
                 Jump();
+                MoveY(velocity.Y, OnCollide);
                 DebugKeyPressed();
+            }
+            else if(Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                direction = new Vector2(0, 1);
+                MoveY(velocity.Y, OnCollide);
             }
             else
             {

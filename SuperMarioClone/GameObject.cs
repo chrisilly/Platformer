@@ -34,6 +34,12 @@ namespace SuperMarioClone
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, size, color);
+            //DrawHitbox(spriteBatch);
+        }
+
+        public void DrawHitbox(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, Hitbox, Color.FromNonPremultiplied(0, 0, 255, 127));
         }
     }
 }
