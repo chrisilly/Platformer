@@ -13,8 +13,6 @@ namespace SuperMarioClone
 {
     internal class Player : Actor
     {
-        bool isJumping;
-
         public Player(Rectangle size) : base(size)
         {
             this.speed = 250f;
@@ -24,8 +22,6 @@ namespace SuperMarioClone
         {
             base.Update(gameTime);
 
-            velocity = direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             CheckPlayerInput();
         }
 
@@ -33,36 +29,29 @@ namespace SuperMarioClone
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                direction = new Vector2(-1, 0);
-                MoveX(velocity.X, OnCollide);
-                DebugKeyPressed();
+                direction += new Vector2(-1, 0);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                direction = new Vector2(1, 0);
-                MoveX(velocity.X, OnCollide);
-                DebugKeyPressed();
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                Jump();
-                MoveY(velocity.Y, OnCollide);
-                DebugKeyPressed();
-            }
-            else if(Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                direction = new Vector2(0, 1);
-                MoveY(velocity.Y, OnCollide);
+                direction += new Vector2(1, 0);
             }
             else
             {
-                direction = Vector2.Zero;
+                direction.X = 0;
             }
-        }
 
-        public void Jump()
-        {
-            direction = new Vector2(0, -1);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                direction += new Vector2(0, -1);
+            }
+            else
+            {
+                direction.Y = 0;
+            }
+
+            if(direction != Vector2.Zero)
+                direction.Normalize();
         }
 
         private void DebugKeyPressed()

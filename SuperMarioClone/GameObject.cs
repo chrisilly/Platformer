@@ -16,8 +16,6 @@ namespace SuperMarioClone
         protected Vector2 position;
         protected Color color = Color.White;
 
-
-
         public GameObject(Rectangle size)
         {
             texture = Assets.tileTexture;

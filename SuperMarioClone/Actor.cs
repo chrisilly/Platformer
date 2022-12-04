@@ -11,17 +11,35 @@ namespace SuperMarioClone
     abstract internal class Actor : GameObject
     {
         protected Vector2 direction;
-        protected Vector2 velocity; // = direction * speed
+        protected Vector2 velocity; // = sign * amount
         protected float speed;
-        protected float gravity = 9.8f;
-        protected Vector2 gravityDirection = new Vector2(0, 1);
 
         float xRemainder;
         float yRemainder;
 
+        protected Vector2 gravityDirection = new Vector2(0, 1);
+        protected float gravityAcceleration = 0.2f;
+
         public Actor(Rectangle size) : base(size)
         {
 
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            // Apply gravity to the object and update velocity
+            if (IsMidAir())
+            {
+                velocity.X = direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                velocity += gravityAcceleration * gravityDirection;
+            }
+            else
+                velocity = direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            MoveX(velocity.X, OnCollideX);
+            MoveY(velocity.Y, OnCollideY);
         }
 
         public bool CollideAt(List<Solid> solids, Vector2 offset)
@@ -46,7 +64,7 @@ namespace SuperMarioClone
                 int sign = Sign(move);
                 while (move != 0)
                 {
-                    if (!CollideAt(Solid.solidList, /*position + */new Vector2(sign, 0)))
+                    if (!CollideAt(Solid.solidList, new Vector2(sign, 0)))
                     {
                         //There is no Solid immediately beside us 
                         position.X += sign;
@@ -73,9 +91,9 @@ namespace SuperMarioClone
                 int sign = Sign(move);
                 while (move != 0)
                 {
-                    if (!CollideAt(Solid.solidList, /*position + */new Vector2(0, sign)))
+                    if (!CollideAt(Solid.solidList, new Vector2(0, sign)))
                     {
-                        //There is no Solid immediately beside us 
+                        //There is no Solid immediately beside us
                         position.Y += sign;
                         move -= sign;
                     }
@@ -100,9 +118,22 @@ namespace SuperMarioClone
                 return 0;
         }
 
-        public virtual void OnCollide()
+        public virtual void OnCollideX()
         {
             Debug.WriteLine("Collision!");
+        }
+        
+        public virtual void OnCollideY()
+        {
+            Debug.WriteLine("Collision!");
+        }
+
+        public bool IsMidAir()
+        {
+            if (!CollideAt(Solid.solidList, gravityDirection))
+                return true;
+
+            return false;
         }
 
     }
