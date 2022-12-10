@@ -26,7 +26,6 @@ namespace SuperMarioClone
 
         protected override void Initialize()
         {
-            Solid.solidList = new List<Solid>();
             enemyList = new List<Enemy>();
 
             base.Initialize();
@@ -89,25 +88,25 @@ namespace SuperMarioClone
             }
         }
 
-        //private void WriteToFile(string fileName)
-        //{
-        //    List<GameObject> gameObjectList = new List<GameObject>();
-        //    for (int i = 0; i < 4; i++)
-        //    {
-        //        Solid solid = new Solid(new Rectangle(i * 100, i * 100 + 75, 120, 50));
-        //        gameObjectList.Add(solid);
-        //        Enemy enemy = new Enemy(new Rectangle(i * 100, i * 100 + 50, 25, 25));
-        //        gameObjectList.Add(enemy);
-        //    }
+        private void WriteToFile(string fileName)
+        {
+            List<GameObject> gameObjectList = new List<GameObject>();
+            //for (int i = 0; i < 4; i++)
+            //{
+            //    Solid solid = new Solid(new Rectangle(i * 100, i * 100 + 75, 120, 50));
+            //    gameObjectList.Add(solid);
+            //    Enemy enemy = new Enemy(new Rectangle(i * 100, i * 100 + 50, 25, 25));
+            //    gameObjectList.Add(enemy);
+            //}
 
-        //    Player newPlayer = new Player(new Rectangle(150, 125, 50, 50));
-        //    gameObjectList.Add(newPlayer);
+            //player = new Player(new Rectangle(150, 125, 50, 50));
+            //gameObjectList.Add(newPlayer);
 
-        //    //Actor goal = new Actor(new Rectangle());
-        //    //gameObjectList.Add(goal);
+            //goal = new Actor(new Rectangle());
+            //gameObjectList.Add(goal);
 
-        //    JsonParser.WriteJsonToFile(fileName, gameObjectList);
-        //}
+            JsonParser.WriteJsonToFile(fileName, gameObjectList);
+        }
     }
 
 }

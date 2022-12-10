@@ -21,7 +21,7 @@ namespace SuperMarioClone
                 currentFileName = fileName;
                 StreamReader file = File.OpenText(@"..\..\..\Content\" + fileName);
                 JsonTextReader reader = new JsonTextReader(file);
-                //string s=File.ReadAllText(fileName);
+                //string s = File.ReadAllText(fileName);
                 wholeObj = JObject.Load(reader);
             }
 
@@ -80,6 +80,11 @@ namespace SuperMarioClone
                 {
                     JObject obj = CreateObject(objectList[i].Hitbox);
                     solidArray.Add(obj);
+                }
+                else if (objectList[i] is Actor)
+                {
+                    JObject obj = CreateObject(objectList[i].Hitbox);
+                    bigobj.Add("actor", obj);
                 }
                 else if (objectList[i] is Player)
                 {

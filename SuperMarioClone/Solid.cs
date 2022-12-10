@@ -9,7 +9,7 @@ namespace SuperMarioClone
 {
     internal class Solid : GameObject
     {
-        public static List<Solid> solidList { get; set; }
+        public static List<Solid> solidList { get; private set; } = new List<Solid>();
 
         public Solid(Rectangle size) : base(size)
         {

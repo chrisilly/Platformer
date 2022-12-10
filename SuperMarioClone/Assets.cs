@@ -10,12 +10,12 @@ namespace SuperMarioClone
 {
     abstract internal class Assets
     {
-        public static Texture2D tileTexture, ballTexture;
+        public static Texture2D tileTexture;
 
         public static void LoadTextures(ContentManager Content)
         {
             tileTexture = Content.Load<Texture2D>("tile");
-            ballTexture = Content.Load<Texture2D>("ball");
+            //ballTexture = Content.Load<Texture2D>("ball");
         }
     }
 }
