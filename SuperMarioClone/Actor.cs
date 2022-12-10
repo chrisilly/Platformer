@@ -8,21 +8,26 @@ using System.Threading.Tasks;
 
 namespace SuperMarioClone
 {
-    abstract internal class Actor : GameObject
+    internal class Actor : GameObject
     {
+        protected Vector2 velocity; // = sign * amount // = direction * speed
         protected Vector2 direction;
-        protected Vector2 velocity; // = sign * amount
         protected float speed;
 
         float xRemainder;
         float yRemainder;
 
         protected Vector2 gravityDirection = new Vector2(0, 1);
-        protected float gravityAcceleration = 0.2f;
+        protected float gravityAcceleration = 0.15f;
 
         public Actor(Rectangle size) : base(size)
         {
 
+        }
+
+        public Actor(Rectangle size, Color color) : base(size)
+        {
+            this.color = color;
         }
 
         public override void Update(GameTime gameTime)
@@ -33,13 +38,13 @@ namespace SuperMarioClone
             if (IsMidAir())
             {
                 velocity.X = direction.X * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                velocity += gravityAcceleration * gravityDirection;
+                velocity.Y += gravityAcceleration;
             }
             else
                 velocity = direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            MoveX(velocity.X, OnCollideX);
-            MoveY(velocity.Y, OnCollideY);
+            MoveX(velocity.X, null);
+            MoveY(velocity.Y, null);
         }
 
         public bool CollideAt(List<Solid> solids, Vector2 offset)
@@ -67,7 +72,7 @@ namespace SuperMarioClone
                     if (!CollideAt(Solid.solidList, new Vector2(sign, 0)))
                     {
                         //There is no Solid immediately beside us 
-                        position.X += sign;
+                        hitbox.X += sign;
                         move -= sign;
                     }
                     else
@@ -94,7 +99,7 @@ namespace SuperMarioClone
                     if (!CollideAt(Solid.solidList, new Vector2(0, sign)))
                     {
                         //There is no Solid immediately beside us
-                        position.Y += sign;
+                        hitbox.Y += sign;
                         move -= sign;
                     }
                     else

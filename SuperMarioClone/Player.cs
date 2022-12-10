@@ -29,11 +29,11 @@ namespace SuperMarioClone
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                direction += new Vector2(-1, 0);
+                direction.X = -1;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                direction += new Vector2(1, 0);
+                direction.X = 1;
             }
             else
             {
@@ -43,7 +43,7 @@ namespace SuperMarioClone
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                direction += new Vector2(0, -1);
+                direction.Y = -1;
             }
             else
             {
@@ -56,7 +56,7 @@ namespace SuperMarioClone
 
         private void DebugKeyPressed()
         {
-            Debug.WriteLine("Key pressed. Variable speed: " + speed + ", direction: " + direction + ", position: " + position);
+            Debug.WriteLine("Key pressed. Variable speed: " + speed + ", direction: " + direction + ", position: " + hitbox.ToString());
         }
     }
 }
