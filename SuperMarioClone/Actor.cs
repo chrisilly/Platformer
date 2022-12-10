@@ -47,18 +47,6 @@ namespace SuperMarioClone
             MoveY(velocity.Y, null);
         }
 
-        public bool CollideAt(List<Solid> solids, Vector2 offset)
-        {
-            foreach (Solid solid in solids)
-            {
-                if (new Rectangle(Hitbox.X + (int)offset.X, Hitbox.Y + (int)offset.Y, Hitbox.Width, Hitbox.Height).Intersects(solid.Hitbox))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public void MoveX(float amount, Action OnCollide)
         {
             xRemainder += amount;
@@ -85,7 +73,6 @@ namespace SuperMarioClone
                 }
             }
         }
-
         public void MoveY(float amount, Action OnCollide)
         {
             yRemainder += amount;
@@ -112,7 +99,6 @@ namespace SuperMarioClone
                 }
             }
         }
-
         public int Sign(int move)
         {
             if (move > 0)
@@ -123,16 +109,23 @@ namespace SuperMarioClone
                 return 0;
         }
 
-        public virtual void OnCollideX()
+        public bool CollideAt(List<Solid> solids, Vector2 offset)
+        {
+            foreach (Solid solid in solids)
+            {
+                if (new Rectangle(Hitbox.X + (int)offset.X, Hitbox.Y + (int)offset.Y, Hitbox.Width, Hitbox.Height).Intersects(solid.Hitbox))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public virtual void OnCollide()
         {
             Debug.WriteLine("Collision!");
         }
         
-        public virtual void OnCollideY()
-        {
-            Debug.WriteLine("Collision!");
-        }
-
         public bool IsMidAir()
         {
             if (!CollideAt(Solid.solidList, gravityDirection))

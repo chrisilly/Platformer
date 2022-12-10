@@ -13,10 +13,6 @@ namespace SuperMarioClone
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        Player player;
-        Actor goal;
-        List<Enemy> enemyList;
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -26,8 +22,6 @@ namespace SuperMarioClone
 
         protected override void Initialize()
         {
-            enemyList = new List<Enemy>();
-
             base.Initialize();
         }
 
@@ -45,7 +39,7 @@ namespace SuperMarioClone
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.Update(gameTime);
+            ActorManager.UpdateActors(gameTime);
 
             base.Update(gameTime);
         }
@@ -57,10 +51,8 @@ namespace SuperMarioClone
 
             foreach (Solid solid in Solid.solidList)
                 solid.Draw(spriteBatch);
-            foreach (Enemy enemy in enemyList)
-                enemy.Draw(spriteBatch);
-            player.Draw(spriteBatch);
-            goal.Draw(spriteBatch);
+
+            ActorManager.DrawActors(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -69,10 +61,10 @@ namespace SuperMarioClone
         private void ReadFromFile(string fileName)
         {
             Rectangle playerRectangle = JsonParser.GetRectangle(fileName, "player");
-            player = new Player(playerRectangle);
+            ActorManager.player = new Player(playerRectangle);
 
             Rectangle goalRectangle = JsonParser.GetRectangle(fileName, "goal");
-            goal = new Actor(goalRectangle, Color.Yellow);
+            ActorManager.goal = new Actor(goalRectangle, Color.Yellow);
 
             List<Rectangle> solidRectangleList = JsonParser.GetRectangleList(fileName, "solid");
             foreach (Rectangle rectangle in solidRectangleList)
@@ -84,7 +76,7 @@ namespace SuperMarioClone
             foreach (Rectangle rectangle in enemyRectangleList)
             {
                 Enemy enemy = new Enemy(rectangle);
-                enemyList.Add(enemy);
+                ActorManager.enemyList.Add(enemy);
             }
         }
 

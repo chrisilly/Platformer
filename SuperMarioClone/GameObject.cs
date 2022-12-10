@@ -12,7 +12,7 @@ namespace SuperMarioClone
     {
         protected Texture2D texture;
         protected Rectangle hitbox;
-        public Rectangle Hitbox { get { return hitbox; } }
+        public Rectangle Hitbox { get { return hitbox; } set { hitbox.X = value.X; hitbox.Y = value.Y; } }
         protected Color color = Color.White;
 
         public GameObject(Rectangle size)
