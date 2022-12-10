@@ -14,6 +14,7 @@ namespace SuperMarioClone
         private SpriteBatch spriteBatch;
 
         Player player;
+        Actor goal;
         List<Enemy> enemyList;
 
         public Game1()
@@ -60,6 +61,7 @@ namespace SuperMarioClone
             foreach (Enemy enemy in enemyList)
                 enemy.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            goal.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -69,6 +71,10 @@ namespace SuperMarioClone
         {
             Rectangle playerRectangle = JsonParser.GetRectangle(fileName, "player");
             player = new Player(playerRectangle);
+
+            Rectangle goalRectangle = JsonParser.GetRectangle(fileName, "goal");
+            goal = new Actor(goalRectangle, Color.Yellow);
+
             List<Rectangle> solidRectangleList = JsonParser.GetRectangleList(fileName, "solid");
             foreach (Rectangle rectangle in solidRectangleList)
             {
@@ -83,22 +89,25 @@ namespace SuperMarioClone
             }
         }
 
-        private void WriteToFile(string fileName)
-        {
-            List<GameObject> gameObjectList = new List<GameObject>();
-            for (int i = 0; i < 4; i++)
-            {
-                Solid solid = new Solid(new Rectangle(i * 100, i * 100 + 75, 120, 50));
-                gameObjectList.Add(solid);
-                Enemy enemy = new Enemy(new Rectangle(i * 100, i * 100 + 50, 25, 25));
-                gameObjectList.Add(enemy);
-            }
+        //private void WriteToFile(string fileName)
+        //{
+        //    List<GameObject> gameObjectList = new List<GameObject>();
+        //    for (int i = 0; i < 4; i++)
+        //    {
+        //        Solid solid = new Solid(new Rectangle(i * 100, i * 100 + 75, 120, 50));
+        //        gameObjectList.Add(solid);
+        //        Enemy enemy = new Enemy(new Rectangle(i * 100, i * 100 + 50, 25, 25));
+        //        gameObjectList.Add(enemy);
+        //    }
 
-            Player newPlayer = new Player(new Rectangle(150, 125, 50, 50));
-            gameObjectList.Add(newPlayer);
+        //    Player newPlayer = new Player(new Rectangle(150, 125, 50, 50));
+        //    gameObjectList.Add(newPlayer);
 
-            JsonParser.WriteJsonToFile(fileName, gameObjectList);
-        }
+        //    //Actor goal = new Actor(new Rectangle());
+        //    //gameObjectList.Add(goal);
+
+        //    JsonParser.WriteJsonToFile(fileName, gameObjectList);
+        //}
     }
 
 }

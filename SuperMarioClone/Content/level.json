@@ -7,8 +7,8 @@
 			"width": 200
 		},
 		{
-			"positionX": 500,
-			"positionY": 100,
+			"positionX": 575,
+			"positionY": 275,
 			"height": 50,
 			"width": 200
 		},
@@ -20,29 +20,35 @@
 		}
 	],
 	"player": {
-		"positionX": 400,
-		"positionY": 250,
-		"height": 50,
-		"width": 50
+		"positionX": 100,
+		"positionY": 275,
+		"height": 25,
+		"width": 25
 	},
 	"enemy": [
 		{
-			"positionX": 100,
-			"positionY": 275,
-			"height": 25,
+			"positionX": 150,
+			"positionY": 290,
+			"height": 10,
 			"width": 25
 		},
 		{
 			"positionX": 500,
-			"positionY": 75,
-			"height": 25,
+			"positionY": 290,
+			"height": 10,
 			"width": 25
 		},
 		{
-			"positionX": 500,
-			"positionY": 275,
+			"positionX": 600,
+			"positionY": 265,
+			"height": 10,
+			"width": 25
+		}
+	],
+	"goal": {
+			"positionX": 725,
+			"positionY": 250,
 			"height": 25,
 			"width": 25
 		}
-	]
 }
